@@ -13,7 +13,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         console.log(profile);
-
+        
         // The "profile" object contains the user's GitHub information
         const existingUser = await User.findOne({ githubId: profile.id });
  
@@ -26,7 +26,8 @@ passport.use(
         const newUser = new User({
           githubId: profile.id,
           username: profile.username,
-          email: profile.emails ? profile.emails[0].value : 'test@mail.com', // Some providers return an array of emails
+          email: profile.emails ? profile.emails[0].value : 'test@mail.com', 
+          // Some providers return an array of emails
           password: Math.random().toString(36).slice(-8)
         });
 
